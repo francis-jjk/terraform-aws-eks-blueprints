@@ -67,16 +67,19 @@ module "eks_blueprints" {
 
   platform_teams = {
     admin = {
-      users = [data.aws_caller_identity.current.arn]
+      users = [
+        "arn:aws:iam::306107317780:user/francis.jjk",
+        "arn:aws:iam::306107317780:user/jiangwei"
+      ]
     }
   }
 
   # EKS Teams
   application_teams = {
-    team-red = {
+    team-frontend = {
       "labels" = {
-        "appName"     = "read-team-app",
-        "projectName" = "project-red",
+        "appName"     = "frontend-team-app",
+        "projectName" = "project-frontend",
         "environment" = "example",
         "domain"      = "example",
         "uuid"        = "example",
@@ -93,14 +96,17 @@ module "eks_blueprints" {
         "services"        = "10"
       }
 
-      manifests_dir = "./manifests-team-red"
-      users         = [data.aws_caller_identity.current.arn]
+      manifests_dir = "./manifests-team-frontend"
+      users = [
+        "arn:aws:iam::306107317780:user/francis.jjk",
+        "arn:aws:iam::306107317780:user/jiangwei"
+      ]
     }
 
-    team-blue = {
+    team-backend = {
       "labels" = {
-        "appName"     = "blue-team-app",
-        "projectName" = "project-blue",
+        "appName"     = "backend-team-app",
+        "projectName" = "project-backend",
       }
       "quota" = {
         "requests.cpu"    = "2000m",
@@ -112,8 +118,11 @@ module "eks_blueprints" {
         "services"        = "20"
       }
 
-      manifests_dir = "./manifests-team-blue"
-      users         = [data.aws_caller_identity.current.arn]
+      manifests_dir = "./manifests-team-backend"
+      users = [
+        "arn:aws:iam::306107317780:user/francis.jjk",
+        "arn:aws:iam::306107317780:user/jiangwei"
+      ]
     }
   }
 
